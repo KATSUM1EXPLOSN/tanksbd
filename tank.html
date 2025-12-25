@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Танк</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="back">← Назад</a>
+  </div>
+</header>
+
+<main class="container">
+  <h2 id="tankName"></h2>
+  <p id="tankDesc"></p>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="stats">Характеристики</button>
+    <button class="tab-btn" data-tab="armor">Броня</button>
+    <button class="tab-btn" data-tab="guide">Гайд</button>
+  </div>
+
+  <div id="stats" class="tab-content active"></div>
+
+  <div id="armor" class="tab-content">
+    <svg viewBox="0 0 500 250" class="armor-svg">
+      <rect x="60" y="140" width="180" height="50" class="armor-zone" data-zone="front"/>
+      <rect x="60" y="190" width="180" height="40" class="armor-zone" data-zone="lower"/>
+      <rect x="240" y="140" width="120" height="90" class="armor-zone" data-zone="side"/>
+      <rect x="360" y="140" width="80" height="90" class="armor-zone" data-zone="rear"/>
+      <ellipse cx="220" cy="120" rx="90" ry="35" class="armor-zone" data-zone="turret"/>
+    </svg>
+    <div id="armorInfo">Наведи курсор на броню</div>
+  </div>
+
+  <div id="guide" class="tab-content"></div>
+</main>
+
+<script src="js/tank-page.js"></script>
+</body>
+</html>
