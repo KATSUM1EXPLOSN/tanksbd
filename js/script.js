@@ -371,7 +371,18 @@ class TankDatabase {
 }
 
 // Инициализация приложения
-const app = new TankDatabase();
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM загружен, создаем приложение...');
+    
+    if (typeof tankDatabase === 'undefined') {
+        console.error('❌ tankDatabase не найден при инициализации!');
+        return;
+    }
+    
+    console.log('✅ tankDatabase найден, создаем приложение...');
+    window.app = new TankDatabase();
+    console.log('✅ Приложение создано успешно!');
+});
 
 // Дополнительные функции для улучшения UX
 document.addEventListener('DOMContentLoaded', function() {
