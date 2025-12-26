@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Полная база данных техники World of Tanks с характеристиками, гайдами и тактиками для всех танков СССР и других наций">
+    <meta name="keywords" content="World of Tanks, WoT, танки, база данных, гайды, СССР, характеристики">
+    <title>World of Tanks - База данных техники | Полный гайд по танкам</title>
+    
+    <!-- Preload критических ресурсов -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- PWA поддержка -->
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Open Graph для социальных сетей -->
+    <meta property="og:title" content="World of Tanks - База данных техники">
+    <meta property="og:description" content="Полная база данных танков WoT с характеристиками и гайдами">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/og-image.jpg">
+</head>
+<body>
+    <!-- Прелоадер -->
+    <div id="preloader" class="preloader">
+        <div class="loading-spinner"></div>
+        <p>Загрузка базы данных танков...</p>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-tank"></i> WoT Database</h1>
+                <span>База данных техники</span>
+            </div>
+            <nav class="version-switcher" role="navigation" aria-label="Выбор версии игры">
+                <button class="version-btn active" data-version="wot" aria-pressed="true">
+                    <i class="fas fa-desktop"></i> WoT PC
+                </button>
+                <button class="version-btn" data-version="blitz" aria-pressed="false">
+                    <i class="fas fa-mobile-alt"></i> WoT Blitz
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Полная база данных техники World of Tanks</h2>
+                <p>Характеристики, гайды и тактики для всех танков СССР и других наций. Включая новые танки XI уровня!</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="main">
+        <div class="container">
+            <section class="filters-section" aria-label="Фильтры поиска">
+                <div class="filters">
+                    <select id="nation-filter" aria-label="Фильтр по нации">
+                        <option value="">🌍 Все нации</option>
+                        <option value="ussr">🇷🇺 СССР</option>
+                        <option value="germany">🇩🇪 Германия</option>
+                        <option value="usa">🇺🇸 США</option>
+                        <option value="france">🇫🇷 Франция</option>
+                        <option value="uk">🇬🇧 Великобритания</option>
+                        <option value="china">🇨🇳 Китай</option>
+                        <option value="japan">🇯🇵 Япония</option>
+                        <option value="czech">🇨🇿 Чехословакия</option>
+                        <option value="sweden">🇸🇪 Швеция</option>
+                        <option value="poland">🇵🇱 Польша</option>
+                        <option value="italy">🇮🇹 Италия</option>
+                    </select>
+
+                    <select id="type-filter" aria-label="Фильтр по типу танка">
+                        <option value="">🚗 Все типы</option>
+                        <option value="heavy">🛡️ Тяжелые танки</option>
+                        <option value="medium">⚖️ Средние танки</option>
+                        <option value="light">💨 Легкие танки</option>
+                        <option value="td">🎯 ПТ-САУ</option>
+                        <option value="spg">💥 Артиллерия</option>
+                    </select>
+
+                    <select id="tier-filter" aria-label="Фильтр по уровню">
+                        <option value="">📊 Все уровни</option>
+                        <option value="1">I</option>
+                        <option value="2">II</option>
+                        <option value="3">III</option>
+                        <option value="4">IV</option>
+                        <option value="5">V</option>
+                        <option value="6">VI</option>
+                        <option value="7">VII</option>
+                        <option value="8">VIII</option>
+                        <option value="9">IX</option>
+                        <option value="10">X</option>
+                        <option value="11">XI</option>
+                    </select>
+
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="🔍 Поиск по названию танка..." aria-label="Поиск танков">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </section>
+
+            <div class="results-info">
+                <span id="results-count" aria-live="polite">Найдено танков: <strong>0</strong></span>
+                <button id="clear-filters" class="clear-btn" aria-label="Очистить все фильтры">
+                    <i class="fas fa-times" aria-hidden="true"></i> Очистить
+                </button>
+            </div>
+
+            <section class="tanks-section" aria-label="Список танков">
+                <div class="tanks-grid" id="tanks-grid" role="grid">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Загрузка танков...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Модальное окно для детальной информации -->
+            <div class="tank-modal" id="tank-modal" role="dialog" aria-modal="true" aria-labelledby="tank-modal-title">
+                <div class="modal-content">
+                    <button class="close" aria-label="Закрыть модальное окно">&times;</button>
+                    <div class="tank-details" id="tank-details">
+                        <!-- Детали танка будут загружены динамически -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Скрипты -->
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+    
+    <!-- Инициализация -->
+    <script>
+        // Убираем прелоадер после загрузки
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.remove(), 300);
+            }
+        });
+        
+        // Регистрация Service Worker для PWA (опционально)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {
+                // Service Worker не критичен для работы
+            });
+        }
+    </script>
+</body>
+</html>
