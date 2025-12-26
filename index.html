@@ -120,10 +120,7 @@
 
             <section class="tanks-section" aria-label="Список танков">
                 <div class="tanks-grid" id="tanks-grid" role="grid">
-                    <div class="loading">
-                        <div class="loading-spinner"></div>
-                        <p>Загрузка танков...</p>
-                    </div>
+   
                 </div>
             </section>
 
@@ -142,7 +139,21 @@
     <!-- Скрипты -->
     <script src="js/data.js"></script>
     <script src="js/script.js"></script>
-    
+     <script>
+        console.log('=== ОТЛАДКА ЗАГРУЗКИ ===');
+        // Проверяем после загрузки всех скриптов
+        window.addEventListener('load', () => {
+            console.log('Все ресурсы загружены');
+            console.log('tankDatabase доступен:', typeof tankDatabase !== 'undefined');
+            if (typeof tankDatabase !== 'undefined') {
+                console.log('✅ WoT танков:', tankDatabase.wot ? tankDatabase.wot.length : 0);
+                console.log('✅ Blitz танков:', tankDatabase.blitz ? tankDatabase.blitz.length : 0);
+            } else {
+                console.error('❌ tankDatabase НЕ НАЙДЕН!');
+            }
+            console.log('TankDatabase класс доступен:', typeof TankDatabase !== 'undefined');
+            
+            // Убираем прелоадер
     <!-- Инициализация -->
     <script>
         // Убираем прелоадер после загрузки
@@ -163,3 +174,4 @@
     </script>
 </body>
 </html>
+
